@@ -1,4 +1,4 @@
-package com.rmd.business.studysmart.ui.theme
+package com.rmd.business.studysmart.presentation.theme
 
 import android.app.Activity
 import android.os.Build
@@ -46,7 +46,6 @@ private val lightColors = lightColorScheme(
     outlineVariant = md_theme_light_outlineVariant,
     scrim = md_theme_light_scrim,
 )
-
 
 private val darkColors = darkColorScheme(
     primary = md_theme_dark_primary,
@@ -110,5 +109,4 @@ fun StudySmartTheme(
         typography = Typography,
         content = content
     )
-
 }

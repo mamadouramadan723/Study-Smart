@@ -1,4 +1,4 @@
-package com.rmd.business.studysmart.ui.theme
+package com.rmd.business.studysmart.presentation.theme
 
 import androidx.compose.ui.graphics.Color
 
