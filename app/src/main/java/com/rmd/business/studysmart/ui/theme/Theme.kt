@@ -110,4 +110,5 @@ fun StudySmartTheme(
         typography = Typography,
         content = content
     )
+
 }
