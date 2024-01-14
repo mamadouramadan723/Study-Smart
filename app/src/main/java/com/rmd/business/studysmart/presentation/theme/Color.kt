@@ -2,7 +2,6 @@ package com.rmd.business.studysmart.presentation.theme
 
 import androidx.compose.ui.graphics.Color
 
-
 val md_theme_light_primary = Color(0xFF185ABE)
 val md_theme_light_onPrimary = Color(0xFFFFFFFF)
 val md_theme_light_primaryContainer = Color(0xFFD8E2FF)
@@ -64,3 +63,29 @@ val md_theme_dark_shadow = Color(0xFF000000)
 val md_theme_dark_surfaceTint = Color(0xFFAEC6FF)
 val md_theme_dark_outlineVariant = Color(0xFF44474F)
 val md_theme_dark_scrim = Color(0xFF000000)
+
+val Red = Color(0xFFD53A2F)
+val Blue = Color(0xFF2965C9)
+val Green = Color(0xFF1E9651)
+val Orange = Color(0xFFFF9800)
+
+val gradient1 = listOf(
+    Color(0xFFad5389),
+    Color(0xFF3c1053)
+)
+val gradient2 = listOf(
+    Color(0xFF3A6073),
+    Color(0xFF16222A)
+)
+val gradient3 = listOf(
+    Color(0xFFF857A6),
+    Color(0xFFFF5858)
+)
+val gradient4 = listOf(
+    Color(0xFF00d2ff),
+    Color(0xFF3a7bd5)
+)
+val gradient5 = listOf(
+    Color(0xFF99f2c8),
+    Color(0xFF1f4037)
+)
