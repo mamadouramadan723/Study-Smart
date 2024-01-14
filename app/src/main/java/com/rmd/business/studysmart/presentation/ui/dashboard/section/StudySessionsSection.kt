@@ -18,15 +18,14 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import com.rmd.business.studysmart.R
-import com.rmd.business.studysmart.domain.model.Task
-import com.rmd.business.studysmart.presentation.component.TaskCardComponent
+import com.rmd.business.studysmart.domain.model.Session
+import com.rmd.business.studysmart.presentation.component.StudySessionCard
 
-fun LazyListScope.TasksListSection(
+fun LazyListScope.StudySessionsSection(
         sectionTitle: String,
         emptyListText: String,
-        tasks: List<Task>,
-        onTaskCardClick: (Int?) -> Unit,
-        onCheckBoxClick: (Task) -> Unit
+        sessions: List<Session>,
+        onDeleteIconClick: (Session) -> Unit
 ) {
     item {
         Text(
@@ -35,7 +34,7 @@ fun LazyListScope.TasksListSection(
             modifier = Modifier.padding(12.dp)
         )
     }
-    if (tasks.isEmpty()) {
+    if (sessions.isEmpty()) {
         item {
             Column(
                 modifier = Modifier.fillMaxWidth(),
@@ -43,7 +42,7 @@ fun LazyListScope.TasksListSection(
             ) {
                 Image(
                     modifier = Modifier.size(120.dp),
-                    painter = painterResource(R.drawable.img_tasks),
+                    painter = painterResource(R.drawable.img_lamp),
                     contentDescription = emptyListText
                 )
                 Spacer(modifier = Modifier.height(12.dp))
@@ -56,13 +55,15 @@ fun LazyListScope.TasksListSection(
             }
         }
     }
-    items(tasks) { task ->
-        TaskCardComponent(modifier = Modifier.padding(
-            horizontal = 12.dp,
-            vertical = 4.dp
-        ),
-            task = task,
-            onCheckBoxClick = { onCheckBoxClick(task) },
-            onClick = { onTaskCardClick(task.taskId) })
+    items(sessions) { session ->
+        StudySessionCard(
+            modifier = Modifier.padding(
+                horizontal = 12.dp,
+                vertical = 4.dp
+            ),
+            session = session,
+            onDeleteIconClick = { onDeleteIconClick(session) }
+        )
     }
 }
+

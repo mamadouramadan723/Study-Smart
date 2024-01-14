@@ -17,7 +17,7 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
 
 @Composable
-fun TaskCheckBoxComponent(
+fun TaskCheckBox(
         isComplete: Boolean,
         borderColor: Color,
         onCheckBoxClick: () -> Unit

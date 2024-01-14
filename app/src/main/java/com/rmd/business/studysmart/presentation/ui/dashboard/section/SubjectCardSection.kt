@@ -25,7 +25,7 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import com.rmd.business.studysmart.R
 import com.rmd.business.studysmart.domain.model.Subject
-import com.rmd.business.studysmart.presentation.component.SubjectCardComponent
+import com.rmd.business.studysmart.presentation.component.SubjectCard
 
 @Composable
 fun SubjectCardSection(
@@ -77,7 +77,7 @@ fun SubjectCardSection(
             )
         ) {
             items(subjectList) { subject ->
-                SubjectCardComponent(subjectName = subject.name,
+                SubjectCard(subjectName = subject.name,
                     gradientColors = subject.colors,
                     onClick = { onSubjectCardClick(subject.subjectId) })
             }

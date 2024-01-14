@@ -6,7 +6,7 @@ import androidx.compose.foundation.layout.width
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
-import com.rmd.business.studysmart.presentation.component.CountCardComponent
+import com.rmd.business.studysmart.presentation.component.CountCard
 
 @Composable
 fun CountCardSection(
@@ -16,19 +16,19 @@ fun CountCardSection(
         goalHours: String
 ) {
     Row(modifier = modifier) {
-        CountCardComponent(
+        CountCard(
             modifier = Modifier.weight(1f),
             headingText = "Subject Count",
             count = "$subjectCount"
         )
         Spacer(modifier = Modifier.width(10.dp))
-        CountCardComponent(
+        CountCard(
             modifier = Modifier.weight(1f),
             headingText = "Studied Hours",
             count = studiedHours
         )
         Spacer(modifier = Modifier.width(10.dp))
-        CountCardComponent(
+        CountCard(
             modifier = Modifier.weight(1f),
             headingText = "Goal Study Hours",
             count = goalHours

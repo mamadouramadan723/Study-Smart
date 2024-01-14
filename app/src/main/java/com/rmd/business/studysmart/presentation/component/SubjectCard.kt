@@ -19,7 +19,7 @@ import androidx.compose.ui.unit.dp
 import com.rmd.business.studysmart.R
 
 @Composable
-fun SubjectCardComponent(
+fun SubjectCard(
         modifier: Modifier = Modifier,
         subjectName: String,
         gradientColors: List<Color>,

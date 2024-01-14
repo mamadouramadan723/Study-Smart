@@ -21,7 +21,7 @@ import com.rmd.business.studysmart.domain.model.Task
 import com.rmd.business.studysmart.presentation.utils.Priority
 
 @Composable
-fun TaskCardComponent(
+fun TaskCard(
         modifier: Modifier = Modifier,
         task: Task,
         onCheckBoxClick: () -> Unit,
@@ -36,7 +36,7 @@ fun TaskCardComponent(
                 .padding(8.dp),
             verticalAlignment = Alignment.CenterVertically
         ) {
-            TaskCheckBoxComponent(
+            TaskCheckBox(
                 isComplete = task.isComplete,
                 borderColor = Priority.fromInt(task.priority).color,
                 onCheckBoxClick = onCheckBoxClick

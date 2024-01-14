@@ -16,7 +16,7 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 
 @Composable
-fun CountCardComponent(
+fun CountCard(
         modifier: Modifier,
         headingText: String,
         count: String
