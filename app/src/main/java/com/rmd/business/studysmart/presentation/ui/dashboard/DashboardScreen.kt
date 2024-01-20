@@ -33,7 +33,6 @@ import com.rmd.business.studysmart.presentation.ui.dashboard.section.TopAppBar
 fun DashboardScreen(
 
 ) {
-
     var isAddSubjectDialogOpen by rememberSaveable { mutableStateOf(false) }
     var isDeleteSessionDialogOpen by rememberSaveable { mutableStateOf(true) }
     var subjectName by remember { mutableStateOf("") }
@@ -62,7 +61,7 @@ fun DashboardScreen(
         onDismissRequest = { isDeleteSessionDialogOpen = false },
         onConfirmButtonClick = { isDeleteSessionDialogOpen = false }
     )
-    
+
     Scaffold(topBar = { TopAppBar() }) { padding ->
         LazyColumn(
             modifier = Modifier.fillMaxSize()
