@@ -11,12 +11,8 @@ fun DashboardScreenRoute(
         navigator: DestinationsNavigator
 ) {
     DashboardScreen(
-        onSubjectCardClick = {
-        },
-        onTaskCardClick = {
-        },
-        onStartSessionButtonClick = {
-
-        }
+        onSubjectCardClick = {},
+        onTaskCardClick = {},
+        onStartSessionButtonClick = {}
     )
 }
