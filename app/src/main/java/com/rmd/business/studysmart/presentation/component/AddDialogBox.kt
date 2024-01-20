@@ -43,19 +43,19 @@ fun AddDialogBox(
                 .padding(bottom = 16.dp),
             horizontalArrangement = Arrangement.SpaceAround
         ) {
-            Subject.subjectCardColors.forEach { colors ->
+            Subject.subjectCardColors.forEach { color ->
                 Box(
                     modifier = Modifier
                         .size(24.dp)
                         .clip(CircleShape)
                         .border(
                             width = 1.dp,
-                            color = if (colors == selectedColors) Color.Black
+                            color = if (color == selectedColors) Color.Black
                             else Color.Transparent,
                             shape = CircleShape
                         )
-                        .background(brush = Brush.verticalGradient(colors))
-                        .clickable { onColorChange(colors) }
+                        .background(brush = Brush.verticalGradient(color))
+                        .clickable { onColorChange(color) }
                 )
             }
         }

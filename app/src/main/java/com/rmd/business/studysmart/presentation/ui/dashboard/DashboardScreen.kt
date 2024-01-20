@@ -34,13 +34,12 @@ fun DashboardScreen(
 
 ) {
     var isAddSubjectDialogOpen by rememberSaveable { mutableStateOf(false) }
-    var isDeleteSessionDialogOpen by rememberSaveable { mutableStateOf(true) }
+    var isDeleteSessionDialogOpen by rememberSaveable { mutableStateOf(false) }
     var subjectName by remember { mutableStateOf("") }
     var goalHours by remember { mutableStateOf("") }
     var selectedColor by remember { mutableStateOf(Subject.subjectCardColors.random()) }
 
-    SubjectAddDialog(
-        isOpen = isAddSubjectDialogOpen,
+    SubjectAddDialog(isOpen = isAddSubjectDialogOpen,
         subjectName = subjectName,
         goalHours = goalHours,
         onSubjectNameChange = { subjectName = it },
@@ -50,17 +49,13 @@ fun DashboardScreen(
         onDismissRequest = { isAddSubjectDialogOpen = false },
         onConfirmButtonClick = {
             isAddSubjectDialogOpen = false
-        }
-    )
+        })
 
-    SubjectDeleteDialog(
-        isOpen = isDeleteSessionDialogOpen,
+    SubjectDeleteDialog(isOpen = isDeleteSessionDialogOpen,
         title = "Delete Session?",
-        bodyText = "Are you sure, you want to delete this session? Your studied hours will be reduced " +
-                "by this session time. This action can not be undone.",
+        bodyText = "Are you sure, you want to delete this session? Your studied hours will be reduced " + "by this session time. This action can not be undone.",
         onDismissRequest = { isDeleteSessionDialogOpen = false },
-        onConfirmButtonClick = { isDeleteSessionDialogOpen = false }
-    )
+        onConfirmButtonClick = { isDeleteSessionDialogOpen = false })
 
     Scaffold(topBar = { TopAppBar() }) { padding ->
         LazyColumn(
@@ -80,7 +75,7 @@ fun DashboardScreen(
             item {
                 SubjectCardSection(modifier = Modifier.fillMaxWidth(),
                     subjectList = subjects,
-                    onAddIconClicked = {},
+                    onAddIconClicked = { isAddSubjectDialogOpen = true },
                     onSubjectCardClick = {})
             }
             item {
@@ -106,7 +101,7 @@ fun DashboardScreen(
             StudySessionsSection(sectionTitle = "RECENT STUDY SESSIONS",
                 emptyListText = "You don't have any recent study sessions.\n " + "Start a study session to begin recording your progress.",
                 sessions = sessions,
-                onDeleteIconClick = { })
+                onDeleteIconClick = { isDeleteSessionDialogOpen = true })
         }
     }
 }
