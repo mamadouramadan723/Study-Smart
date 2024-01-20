@@ -6,7 +6,7 @@ import androidx.compose.material3.TextButton
 import androidx.compose.runtime.Composable
 
 @Composable
-fun SubjectDeleteDialog(
+fun DialogDelete(
         isOpen: Boolean,
         title: String,
         bodyText: String,

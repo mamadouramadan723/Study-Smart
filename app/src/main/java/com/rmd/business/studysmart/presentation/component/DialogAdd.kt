@@ -11,7 +11,7 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.graphics.Color
 
 @Composable
-fun SubjectAddDialog(
+fun DialogAdd(
         isOpen: Boolean,
         title: String = "Add/Update Subject",
         selectedColors: List<Color>,

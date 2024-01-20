@@ -21,8 +21,8 @@ import com.rmd.business.studysmart.data.datasource.local.sessions
 import com.rmd.business.studysmart.data.datasource.local.subjects
 import com.rmd.business.studysmart.data.datasource.local.tasks
 import com.rmd.business.studysmart.domain.model.Subject
-import com.rmd.business.studysmart.presentation.component.SubjectAddDialog
-import com.rmd.business.studysmart.presentation.component.SubjectDeleteDialog
+import com.rmd.business.studysmart.presentation.component.DialogAdd
+import com.rmd.business.studysmart.presentation.component.DialogDelete
 import com.rmd.business.studysmart.presentation.ui.dashboard.section.CountCardSection
 import com.rmd.business.studysmart.presentation.ui.dashboard.section.StudySessionsSection
 import com.rmd.business.studysmart.presentation.ui.dashboard.section.SubjectCardSection
@@ -39,7 +39,8 @@ fun DashboardScreen(
     var goalHours by remember { mutableStateOf("") }
     var selectedColor by remember { mutableStateOf(Subject.subjectCardColors.random()) }
 
-    SubjectAddDialog(isOpen = isAddSubjectDialogOpen,
+    DialogAdd(
+        isOpen = isAddSubjectDialogOpen,
         subjectName = subjectName,
         goalHours = goalHours,
         onSubjectNameChange = { subjectName = it },
@@ -51,7 +52,8 @@ fun DashboardScreen(
             isAddSubjectDialogOpen = false
         })
 
-    SubjectDeleteDialog(isOpen = isDeleteSessionDialogOpen,
+    DialogDelete(
+        isOpen = isDeleteSessionDialogOpen,
         title = "Delete Session?",
         bodyText = "Are you sure, you want to delete this session? Your studied hours will be reduced " + "by this session time. This action can not be undone.",
         onDismissRequest = { isDeleteSessionDialogOpen = false },
