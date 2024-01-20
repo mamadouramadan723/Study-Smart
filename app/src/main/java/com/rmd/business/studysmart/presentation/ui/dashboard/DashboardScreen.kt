@@ -31,7 +31,9 @@ import com.rmd.business.studysmart.presentation.ui.dashboard.section.SubjectCard
 
 @Composable
 fun DashboardScreen(
-
+        onSubjectCardClick: (Int?) -> Unit,
+        onTaskCardClick: (Int?) -> Unit,
+        onStartSessionButtonClick: () -> Unit
 ) {
     var isAddSubjectDialogOpen by rememberSaveable { mutableStateOf(false) }
     var isDeleteSessionDialogOpen by rememberSaveable { mutableStateOf(false) }
