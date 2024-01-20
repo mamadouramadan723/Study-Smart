@@ -5,7 +5,7 @@ import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
 import com.rmd.business.studysmart.presentation.theme.StudySmartTheme
-import com.rmd.business.studysmart.presentation.ui.dashboard.DashboardScreen
+import com.rmd.business.studysmart.presentation.ui.subject.SubjectScreen
 
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -13,7 +13,12 @@ class MainActivity : ComponentActivity() {
         enableEdgeToEdge()
         setContent {
             StudySmartTheme {
-                DashboardScreen()
+                //DashboardScreen()
+                SubjectScreen(
+                    onBackButtonClick = {},
+                    onAddTaskButtonClick = {},
+                    onTaskCardClick = {}
+                )
             }
         }
     }

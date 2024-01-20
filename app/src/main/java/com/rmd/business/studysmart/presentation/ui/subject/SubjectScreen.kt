@@ -37,7 +37,7 @@ import com.rmd.business.studysmart.presentation.ui.subject.section.SubjectTopBar
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-private fun SubjectScreen(
+fun SubjectScreen(
         onBackButtonClick: () -> Unit,
         onAddTaskButtonClick: () -> Unit,
         onTaskCardClick: (Int?) -> Unit
