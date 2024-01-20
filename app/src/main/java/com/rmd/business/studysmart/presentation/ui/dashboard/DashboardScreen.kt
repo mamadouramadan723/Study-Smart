@@ -23,11 +23,11 @@ import com.rmd.business.studysmart.data.datasource.local.tasks
 import com.rmd.business.studysmart.domain.model.Subject
 import com.rmd.business.studysmart.presentation.component.DialogAdd
 import com.rmd.business.studysmart.presentation.component.DialogDelete
+import com.rmd.business.studysmart.presentation.component.TasksList
 import com.rmd.business.studysmart.presentation.ui.dashboard.section.CountCardSection
 import com.rmd.business.studysmart.presentation.ui.dashboard.section.DashboardTopAppBar
 import com.rmd.business.studysmart.presentation.ui.dashboard.section.StudySessionsSection
 import com.rmd.business.studysmart.presentation.ui.dashboard.section.SubjectCardSection
-import com.rmd.business.studysmart.presentation.ui.dashboard.section.TasksListSection
 
 @Composable
 fun DashboardScreen(
@@ -92,7 +92,8 @@ fun DashboardScreen(
                     Text(text = "Start Study Session")
                 }
             }
-            TasksListSection(sectionTitle = "UPCOMING TASKS",
+            TasksList(
+                sectionTitle = "UPCOMING TASKS",
                 emptyListText = "You don't have any upcoming tasks.\n " + "Click the + button in subject screen to add new task.",
                 tasks = tasks,
                 onCheckBoxClick = {},

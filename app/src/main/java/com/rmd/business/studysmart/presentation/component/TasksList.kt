@@ -1,4 +1,4 @@
-package com.rmd.business.studysmart.presentation.ui.dashboard.section
+package com.rmd.business.studysmart.presentation.component
 
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.Column
@@ -19,9 +19,8 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import com.rmd.business.studysmart.R
 import com.rmd.business.studysmart.domain.model.Task
-import com.rmd.business.studysmart.presentation.component.TaskCard
 
-fun LazyListScope.TasksListSection(
+fun LazyListScope.TasksList(
         sectionTitle: String,
         emptyListText: String,
         tasks: List<Task>,
