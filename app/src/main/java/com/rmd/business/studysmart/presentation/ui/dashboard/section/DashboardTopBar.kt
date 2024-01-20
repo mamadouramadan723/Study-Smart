@@ -1,4 +1,4 @@
-package com.rmd.business.studysmart.presentation.component
+package com.rmd.business.studysmart.presentation.ui.dashboard.section
 
 import androidx.compose.material3.CenterAlignedTopAppBar
 import androidx.compose.material3.ExperimentalMaterial3Api
@@ -10,7 +10,7 @@ import com.rmd.business.studysmart.R
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun TopAppBar() {
+fun DashboardTopAppBar() {
     CenterAlignedTopAppBar(title = {
         Text(
             text = stringResource(R.string.app_name),

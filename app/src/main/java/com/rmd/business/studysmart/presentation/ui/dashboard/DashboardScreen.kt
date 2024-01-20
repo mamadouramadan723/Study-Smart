@@ -24,10 +24,10 @@ import com.rmd.business.studysmart.domain.model.Subject
 import com.rmd.business.studysmart.presentation.component.DialogAdd
 import com.rmd.business.studysmart.presentation.component.DialogDelete
 import com.rmd.business.studysmart.presentation.ui.dashboard.section.CountCardSection
+import com.rmd.business.studysmart.presentation.ui.dashboard.section.DashboardTopAppBar
 import com.rmd.business.studysmart.presentation.ui.dashboard.section.StudySessionsSection
 import com.rmd.business.studysmart.presentation.ui.dashboard.section.SubjectCardSection
 import com.rmd.business.studysmart.presentation.ui.dashboard.section.TasksListSection
-import com.rmd.business.studysmart.presentation.ui.dashboard.section.TopAppBar
 
 @Composable
 fun DashboardScreen(
@@ -59,7 +59,7 @@ fun DashboardScreen(
         onDismissRequest = { isDeleteSessionDialogOpen = false },
         onConfirmButtonClick = { isDeleteSessionDialogOpen = false })
 
-    Scaffold(topBar = { TopAppBar() }) { padding ->
+    Scaffold(topBar = { DashboardTopAppBar() }) { padding ->
         LazyColumn(
             modifier = Modifier.fillMaxSize()
                 .padding(padding)
