@@ -1,4 +1,4 @@
-package com.rmd.business.studysmart.presentation.ui.dashboard.section
+package com.rmd.business.studysmart.presentation.component
 
 import androidx.compose.material3.CenterAlignedTopAppBar
 import androidx.compose.material3.ExperimentalMaterial3Api
