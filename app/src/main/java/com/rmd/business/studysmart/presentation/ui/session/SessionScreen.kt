@@ -22,9 +22,9 @@ import com.rmd.business.studysmart.data.datasource.local.subjects
 import com.rmd.business.studysmart.presentation.component.DialogDelete
 import com.rmd.business.studysmart.presentation.component.StudySessionsList
 import com.rmd.business.studysmart.presentation.component.SubjectListBottomSheet
-import com.rmd.business.studysmart.presentation.ui.session.section.ControlButtonSection
 import com.rmd.business.studysmart.presentation.ui.session.section.RelatedToSubjectSection
 import com.rmd.business.studysmart.presentation.ui.session.section.SessionTopBar
+import com.rmd.business.studysmart.presentation.ui.session.section.TimerControlButton
 import com.rmd.business.studysmart.presentation.ui.session.section.TimerSection
 import kotlinx.coroutines.launch
 
@@ -92,7 +92,7 @@ fun SessionScreen(
                 )
             }
             item {
-                ControlButtonSection(
+                TimerControlButton(
                     modifier = Modifier
                         .fillMaxWidth()
                         .padding(12.dp),

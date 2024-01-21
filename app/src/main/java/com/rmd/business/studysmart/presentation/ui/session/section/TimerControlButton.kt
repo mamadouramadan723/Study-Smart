@@ -10,7 +10,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 
 @Composable
-fun ControlButtonSection(
+fun TimerControlButton(
         modifier: Modifier,
         startButtonClick: () -> Unit,
         cancelButtonClick: () -> Unit,
