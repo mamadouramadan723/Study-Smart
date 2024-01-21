@@ -37,9 +37,7 @@ fun SessionScreen(
     val scope = rememberCoroutineScope()
     val sheetState = rememberModalBottomSheetState()
     var isBottomSheetOpen by remember { mutableStateOf(false) }
-
     var isDeleteDialogOpen by rememberSaveable { mutableStateOf(false) }
-
 
     SubjectListBottomSheet(
         sheetState = sheetState,

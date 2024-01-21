@@ -29,7 +29,10 @@ fun TimerControlButton(
                 text = "Cancel"
             )
         }
-        Button(onClick = startButtonClick) {
+        Button(
+            onClick = startButtonClick,
+
+            ) {
             Text(
                 modifier = Modifier.padding(
                     horizontal = 10.dp,
