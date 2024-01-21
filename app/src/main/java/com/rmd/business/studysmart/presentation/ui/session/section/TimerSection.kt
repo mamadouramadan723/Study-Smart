@@ -24,7 +24,7 @@ fun TimerSection(
             modifier = Modifier
                 .size(250.dp)
                 .border(
-                    5.dp,
+                    8.dp,
                     MaterialTheme.colorScheme.surfaceVariant,
                     CircleShape
                 )
@@ -33,5 +33,6 @@ fun TimerSection(
             text = "00:05:32",
             style = MaterialTheme.typography.titleLarge.copy(fontSize = 45.sp)
         )
+
     }
 }
