@@ -17,6 +17,7 @@ import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
+import com.ramcosta.composedestinations.annotation.Destination
 import com.rmd.business.studysmart.data.datasource.local.sessions
 import com.rmd.business.studysmart.data.datasource.local.subjects
 import com.rmd.business.studysmart.data.datasource.local.tasks
@@ -29,6 +30,7 @@ import com.rmd.business.studysmart.presentation.ui.dashboard.section.DashboardTo
 import com.rmd.business.studysmart.presentation.ui.dashboard.section.StudySessionsSection
 import com.rmd.business.studysmart.presentation.ui.dashboard.section.SubjectCardSection
 
+@Destination(start = true)
 @Composable
 fun DashboardScreen(
         onSubjectCardClick: (Int?) -> Unit,
