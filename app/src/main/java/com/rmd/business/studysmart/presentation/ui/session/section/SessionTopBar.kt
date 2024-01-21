@@ -12,7 +12,7 @@ import androidx.compose.runtime.Composable
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-private fun SessionTopBar(
+fun SessionTopBar(
         onBackButtonClick: () -> Unit
 ) {
     TopAppBar(

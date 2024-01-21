@@ -13,7 +13,7 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 
 @Composable
-private fun TimerSection(
+fun TimerSection(
         modifier: Modifier
 ) {
     Box(
