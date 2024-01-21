@@ -11,7 +11,6 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.ArrowDropDown
 import androidx.compose.material.icons.filled.DateRange
 import androidx.compose.material3.Button
 import androidx.compose.material3.ExperimentalMaterial3Api
@@ -40,6 +39,7 @@ import com.rmd.business.studysmart.presentation.component.PriorityButton
 import com.rmd.business.studysmart.presentation.component.SubjectListBottomSheet
 import com.rmd.business.studysmart.presentation.component.TaskDatePicker
 import com.rmd.business.studysmart.presentation.theme.Red
+import com.rmd.business.studysmart.presentation.ui.session.section.RelatedToSubjectSection
 import com.rmd.business.studysmart.presentation.ui.task.section.TaskTopBar
 import com.rmd.business.studysmart.presentation.utils.Priority
 import com.rmd.business.studysmart.presentation.utils.changeMillisToDateString
@@ -74,28 +74,22 @@ fun TaskScreen(
         else -> null
     }
 
-    DialogDelete(
-        isOpen = isDeleteDialogOpen,
+    DialogDelete(isOpen = isDeleteDialogOpen,
         title = "Delete Task?",
-        bodyText = "Are you sure, you want to delete this task? " +
-                "This action can not be undone.",
+        bodyText = "Are you sure, you want to delete this task? " + "This action can not be undone.",
         onDismissRequest = { isDeleteDialogOpen = false },
         onConfirmButtonClick = {
             isDeleteDialogOpen = false
-        }
-    )
+        })
 
-    TaskDatePicker(
-        state = datePickerState,
+    TaskDatePicker(state = datePickerState,
         isOpen = isDatePickerDialogOpen,
         onDismissRequest = { isDatePickerDialogOpen = false },
         onConfirmButtonClicked = {
             isDatePickerDialogOpen = false
-        }
-    )
+        })
 
-    SubjectListBottomSheet(
-        sheetState = sheetState,
+    SubjectListBottomSheet(sheetState = sheetState,
         isOpen = isBottomSheetOpen,
         subjects = subjects,
         onDismissRequest = { isBottomSheetOpen = false },
@@ -104,37 +98,29 @@ fun TaskScreen(
                 .invokeOnCompletion {
                     if (!sheetState.isVisible) isBottomSheetOpen = false
                 }
-        }
-    )
+        })
 
-    Scaffold(
-        topBar = {
-            TaskTopBar(
-                isTaskExist = true,
-                isComplete = false,
-                checkBoxBorderColor = Red,
-                onBackButtonClick = onBackButtonClick,
-                onDeleteButtonClick = { isDeleteDialogOpen = true },
-                onCheckBoxClick = {}
-            )
-        }
-    ) { paddingValue ->
+    Scaffold(topBar = {
+        TaskTopBar(isTaskExist = true,
+            isComplete = false,
+            checkBoxBorderColor = Red,
+            onBackButtonClick = onBackButtonClick,
+            onDeleteButtonClick = { isDeleteDialogOpen = true },
+            onCheckBoxClick = {})
+    }) { paddingValue ->
         Column(
-            modifier = Modifier
-                .verticalScroll(state = rememberScrollState())
+            modifier = Modifier.verticalScroll(state = rememberScrollState())
                 .fillMaxSize()
                 .padding(paddingValue)
                 .padding(horizontal = 12.dp)
         ) {
-            OutlinedTextField(
-                modifier = Modifier.fillMaxWidth(),
+            OutlinedTextField(modifier = Modifier.fillMaxWidth(),
                 value = title,
                 onValueChange = { title = it },
                 label = { Text(text = "Title") },
                 singleLine = true,
                 isError = taskTitleError != null && title.isNotBlank(),
-                supportingText = { Text(text = taskTitleError.orEmpty()) }
-            )
+                supportingText = { Text(text = taskTitleError.orEmpty()) })
             Spacer(modifier = Modifier.height(10.dp))
             OutlinedTextField(
                 modifier = Modifier.fillMaxWidth(),
@@ -171,8 +157,7 @@ fun TaskScreen(
             Spacer(modifier = Modifier.height(10.dp))
             Row(modifier = Modifier.fillMaxWidth()) {
                 Priority.entries.forEach { priority ->
-                    PriorityButton(
-                        modifier = Modifier.weight(1f),
+                    PriorityButton(modifier = Modifier.weight(1f),
                         label = priority.title,
                         backgroundColor = priority.color,
                         borderColor = if (priority == Priority.MEDIUM) {
@@ -181,36 +166,18 @@ fun TaskScreen(
                         labelColor = if (priority == Priority.MEDIUM) {
                             Color.White
                         } else Color.White.copy(alpha = 0.7f),
-                        onClick = {}
-                    )
+                        onClick = {})
                 }
             }
             Spacer(modifier = Modifier.height(30.dp))
-            Text(
-                text = "Related to subject",
-                style = MaterialTheme.typography.bodySmall
-            )
-            Row(
-                modifier = Modifier.fillMaxWidth(),
-                horizontalArrangement = Arrangement.SpaceBetween,
-                verticalAlignment = Alignment.CenterVertically
-            ) {
-                Text(
-                    text = "English",
-                    style = MaterialTheme.typography.bodyLarge
-                )
-                IconButton(onClick = { isBottomSheetOpen = true }) {
-                    Icon(
-                        imageVector = Icons.Default.ArrowDropDown,
-                        contentDescription = "Select Subject"
-                    )
-                }
-            }
+            RelatedToSubjectSection(modifier = Modifier.fillMaxWidth()
+                .padding(horizontal = 12.dp),
+                relatedToSubject = "English",
+                selectSubjectButtonClick = { isBottomSheetOpen = true })
             Button(
                 enabled = taskTitleError == null,
                 onClick = { /*TODO*/ },
-                modifier = Modifier
-                    .fillMaxWidth()
+                modifier = Modifier.fillMaxWidth()
                     .padding(vertical = 20.dp)
             ) {
                 Text(text = "Save")
