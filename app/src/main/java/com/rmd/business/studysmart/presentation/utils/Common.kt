@@ -42,5 +42,5 @@ fun Long?.changeMillisToDateString(): String {
             .atZone(ZoneId.systemDefault())
             .toLocalDate()
     } ?: LocalDate.now()
-    return date.format(DateTimeFormatter.ofPattern("dd MMM yyyy"))
+    return date.format(DateTimeFormatter.ofPattern("dd MMMM yyyy"))
 }

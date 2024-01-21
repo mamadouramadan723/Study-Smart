@@ -12,7 +12,7 @@ import androidx.compose.runtime.setValue
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-private fun SessionScreen(
+fun SessionScreen(
         onBackButtonClick: () -> Unit
 ) {
 
