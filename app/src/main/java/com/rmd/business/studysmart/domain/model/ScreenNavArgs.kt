@@ -8,3 +8,4 @@ data class TaskScreenNavArgs(
         val taskId: Int?,
         val subjectId: Int?
 )
+

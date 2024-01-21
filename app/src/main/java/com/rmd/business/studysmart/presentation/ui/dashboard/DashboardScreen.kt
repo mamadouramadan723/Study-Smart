@@ -17,7 +17,6 @@ import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
-import com.ramcosta.composedestinations.annotation.Destination
 import com.rmd.business.studysmart.data.datasource.local.sessions
 import com.rmd.business.studysmart.data.datasource.local.subjects
 import com.rmd.business.studysmart.data.datasource.local.tasks
@@ -30,7 +29,6 @@ import com.rmd.business.studysmart.presentation.ui.dashboard.section.DashboardTo
 import com.rmd.business.studysmart.presentation.ui.dashboard.section.StudySessionsSection
 import com.rmd.business.studysmart.presentation.ui.dashboard.section.SubjectCardSection
 
-@Destination(start = true)
 @Composable
 fun DashboardScreen(
         onSubjectCardClick: (Int?) -> Unit,
@@ -79,14 +77,16 @@ fun DashboardScreen(
                 )
             }
             item {
-                SubjectCardSection(modifier = Modifier.fillMaxWidth(),
+                SubjectCardSection(
+                    modifier = Modifier.fillMaxWidth(),
                     subjectList = subjects,
                     onAddIconClicked = { isAddSubjectDialogOpen = true },
-                    onSubjectCardClick = {})
+                    onSubjectCardClick = onSubjectCardClick
+                )
             }
             item {
                 Button(
-                    onClick = { /*onStartSessionButtonClick*/ },
+                    onClick = onStartSessionButtonClick,
                     modifier = Modifier.fillMaxWidth()
                         .padding(
                             horizontal = 48.dp,
@@ -101,7 +101,8 @@ fun DashboardScreen(
                 emptyListText = "You don't have any upcoming tasks.\n " + "Click the + button in subject screen to add new task.",
                 tasks = tasks,
                 onCheckBoxClick = {},
-                onTaskCardClick = {})
+                onTaskCardClick = onTaskCardClick
+            )
             item {
                 Spacer(modifier = Modifier.height(20.dp))
             }

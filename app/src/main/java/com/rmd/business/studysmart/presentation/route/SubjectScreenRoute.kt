@@ -4,6 +4,8 @@ import androidx.compose.runtime.Composable
 import com.ramcosta.composedestinations.annotation.Destination
 import com.ramcosta.composedestinations.navigation.DestinationsNavigator
 import com.rmd.business.studysmart.domain.model.ScreenNavArgs
+import com.rmd.business.studysmart.domain.model.TaskScreenNavArgs
+import com.rmd.business.studysmart.presentation.route.destinations.TaskScreenRouteDestination
 import com.rmd.business.studysmart.presentation.ui.subject.SubjectScreen
 
 @Destination(navArgsDelegate = ScreenNavArgs::class)
@@ -11,7 +13,21 @@ import com.rmd.business.studysmart.presentation.ui.subject.SubjectScreen
 fun SubjectScreenRoute(
         navigator: DestinationsNavigator
 ) {
-    SubjectScreen(onBackButtonClick = { navigator.navigateUp() },
-        onAddTaskButtonClick = {},
-        onTaskCardClick = {})
+    SubjectScreen(
+        onBackButtonClick = { navigator.navigateUp() },
+        onAddTaskButtonClick = {
+            val navArg = TaskScreenNavArgs(
+                taskId = null,
+                subjectId = -1
+            )
+            navigator.navigate(TaskScreenRouteDestination(navArgs = navArg))
+        },
+        onTaskCardClick = { taskId ->
+            val navArg = TaskScreenNavArgs(
+                taskId = taskId,
+                subjectId = null
+            )
+            navigator.navigate(TaskScreenRouteDestination(navArgs = navArg))
+        }
+    )
 }
