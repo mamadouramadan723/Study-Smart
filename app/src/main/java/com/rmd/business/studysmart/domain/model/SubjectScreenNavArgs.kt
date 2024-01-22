@@ -1,6 +1,6 @@
 package com.rmd.business.studysmart.domain.model
 
-data class ScreenNavArgs(
+data class SubjectScreenNavArgs(
         val subjectId: Int
 )
 

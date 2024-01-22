@@ -3,7 +3,7 @@ package com.rmd.business.studysmart.presentation.route
 import androidx.compose.runtime.Composable
 import com.ramcosta.composedestinations.annotation.Destination
 import com.ramcosta.composedestinations.navigation.DestinationsNavigator
-import com.rmd.business.studysmart.domain.model.ScreenNavArgs
+import com.rmd.business.studysmart.domain.model.SubjectScreenNavArgs
 import com.rmd.business.studysmart.domain.model.TaskScreenNavArgs
 import com.rmd.business.studysmart.presentation.route.destinations.SessionScreenRouteDestination
 import com.rmd.business.studysmart.presentation.route.destinations.SubjectScreenRouteDestination
@@ -17,7 +17,7 @@ fun DashboardScreenRoute(
 ) {
     DashboardScreen(onSubjectCardClick = { subjectId ->
         subjectId?.let {
-            val navArg = ScreenNavArgs(subjectId = subjectId)
+            val navArg = SubjectScreenNavArgs(subjectId = subjectId)
             navigator.navigate(SubjectScreenRouteDestination(navArgs = navArg))
         }
     },
