@@ -1,36 +1,40 @@
 package com.rmd.business.studysmart.data.repository
 
-import com.rmd.business.studysmart.data.datasource.local.dao.SubjectDao
-import com.rmd.business.studysmart.domain.model.Subject
-import com.rmd.business.studysmart.domain.repository.SubjectRepository
+import com.rmd.business.studysmart.data.datasource.local.dao.SessionDao
+import com.rmd.business.studysmart.domain.model.Session
+import com.rmd.business.studysmart.domain.repository.SessionRepository
 import kotlinx.coroutines.flow.Flow
 import javax.inject.Inject
 
 class SessionRepositoryImpl @Inject constructor(
-        private val subjectDao: SubjectDao
-) : SubjectRepository {
+        private val sessionDao: SessionDao
+) : SessionRepository {
 
-    override suspend fun upsertSubject(subject: Subject) {
-        subjectDao.upsertSubject(subject)
+    override suspend fun insertSession(session: Session) {
+        sessionDao.insertSession(session)
     }
 
-    override fun getTotalSubjectCount(): Flow<Int> {
+    override suspend fun deleteSession(session: Session) {
         TODO("Not yet implemented")
     }
 
-    override fun getTotalGoalHours(): Flow<Float> {
+    override fun getAllSessions(): Flow<List<Session>> {
         TODO("Not yet implemented")
     }
 
-    override suspend fun deleteSubject(subjectInt: Int) {
+    override fun getRecentFiveSessions(): Flow<List<Session>> {
         TODO("Not yet implemented")
     }
 
-    override suspend fun getSubjectById(subjectInt: Int): Subject? {
+    override fun getRecentTenSessionsForSubject(subjectId: Int): Flow<List<Session>> {
         TODO("Not yet implemented")
     }
 
-    override fun getAllSubjects(): Flow<List<Subject>> {
+    override fun getTotalSessionsDuration(): Flow<Long> {
+        TODO("Not yet implemented")
+    }
+
+    override fun getTotalSessionsDurationBySubjectId(subjectId: Int): Flow<Long> {
         TODO("Not yet implemented")
     }
 }
