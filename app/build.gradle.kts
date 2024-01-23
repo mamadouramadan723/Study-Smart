@@ -93,4 +93,7 @@ dependencies {
 
     //Desugaring
     coreLibraryDesugaring(libs.desugar.jdk.libs)
+
+    //Gson
+    implementation(libs.gson)
 }

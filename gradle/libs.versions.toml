@@ -2,6 +2,7 @@
 agp = "8.4.0-alpha05"
 core = "1.9.52"
 desugar_jdk_libs = "2.0.4"
+gson = "2.10.1"
 hiltAndroid = "2.48"
 hiltCompiler = "1.1.0"
 kotlin = "1.9.20"
@@ -27,6 +28,7 @@ androidx-room-runtime = { module = "androidx.room:room-runtime", version.ref = "
 androidx-ui-text-google-fonts = { module = "androidx.compose.ui:ui-text-google-fonts", version.ref = "uiTextGoogleFonts" }
 core = { module = "io.github.raamcosta.compose-destinations:core", version.ref = "core" }
 desugar_jdk_libs = { module = "com.android.tools:desugar_jdk_libs", version.ref = "desugar_jdk_libs" }
+gson = { module = "com.google.code.gson:gson", version.ref = "gson" }
 hilt-android = { module = "com.google.dagger:hilt-android", version.ref = "hiltAndroid" }
 hilt-android-compiler = { module = "com.google.dagger:hilt-android-compiler", version.ref = "hiltAndroid" }
 junit = { group = "junit", name = "junit", version.ref = "junit" }
