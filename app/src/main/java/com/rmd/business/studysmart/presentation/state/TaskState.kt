@@ -1,4 +1,4 @@
-package com.rmd.business.studysmart.presentation.state_event.state
+package com.rmd.business.studysmart.presentation.state
 
 import com.rmd.business.studysmart.domain.model.Subject
 import com.rmd.business.studysmart.presentation.utils.Priority

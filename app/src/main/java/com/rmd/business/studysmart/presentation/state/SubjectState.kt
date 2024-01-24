@@ -1,4 +1,4 @@
-package com.rmd.business.studysmart.presentation.state_event.state
+package com.rmd.business.studysmart.presentation.state
 
 import androidx.compose.ui.graphics.Color
 import com.rmd.business.studysmart.domain.model.Session
