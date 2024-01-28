@@ -12,4 +12,6 @@ class DashboardViewModel @Inject constructor(
         private val subjectRepository: SubjectRepository,
         private val sessionRepository: SessionRepository,
         private val taskRepository: TaskRepository
-) : ViewModel()
+) : ViewModel() {
+    //
+}
