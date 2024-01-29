@@ -41,7 +41,7 @@ class SubjectViewModel @Inject constructor(
     private val navArgs: SubjectScreenNavArgs = savedStateHandle.navArgs()
 
     private val _state = MutableStateFlow(SubjectState())
-    private val state = combine(
+    val state = combine(
         _state,
         taskRepository.getUpcomingTasksForSubject(navArgs.subjectId),
         taskRepository.getCompletedTasksForSubject(navArgs.subjectId),
