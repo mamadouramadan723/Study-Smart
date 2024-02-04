@@ -12,18 +12,16 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.remember
 import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import com.rmd.business.studysmart.data.datasource.local.sessions
-import com.rmd.business.studysmart.data.datasource.local.subjects
 import com.rmd.business.studysmart.data.datasource.local.tasks
-import com.rmd.business.studysmart.domain.model.Subject
 import com.rmd.business.studysmart.presentation.component.DialogAdd
 import com.rmd.business.studysmart.presentation.component.DialogDelete
 import com.rmd.business.studysmart.presentation.component.TasksList
+import com.rmd.business.studysmart.presentation.state.DashboardState
 import com.rmd.business.studysmart.presentation.ui.dashboard.section.CountCardSection
 import com.rmd.business.studysmart.presentation.ui.dashboard.section.DashboardTopAppBar
 import com.rmd.business.studysmart.presentation.ui.dashboard.section.StudySessionsSection
@@ -31,6 +29,7 @@ import com.rmd.business.studysmart.presentation.ui.dashboard.section.SubjectCard
 
 @Composable
 fun DashboardScreen(
+        state: DashboardState,
         onSubjectCardClick: (Int?) -> Unit,
         onTaskCardClick: (Int?) -> Unit,
         onStartSessionButtonClick: () -> Unit
@@ -38,18 +37,14 @@ fun DashboardScreen(
     var isAddSubjectDialogOpen by rememberSaveable { mutableStateOf(false) }
     var isDeleteSessionDialogOpen by rememberSaveable { mutableStateOf(false) }
 
-    var subjectName by remember { mutableStateOf("") }
-    var goalHours by remember { mutableStateOf("") }
-    var selectedColor by remember { mutableStateOf(Subject.subjectCardColors.random()) }
-
     DialogAdd(
         isOpen = isAddSubjectDialogOpen,
-        subjectName = subjectName,
-        goalHours = goalHours,
-        onSubjectNameChange = { subjectName = it },
-        onGoalHoursChange = { goalHours = it },
-        selectedColors = selectedColor,
-        onColorChange = { selectedColor = it },
+        subjectName = state.subjectName,
+        goalHours = state.goalStudyHours,
+        selectedColors = state.subjectCardColors,
+        onSubjectNameChange = { },
+        onGoalHoursChange = { },
+        onColorChange = { },
         onDismissRequest = { isAddSubjectDialogOpen = false },
         onConfirmButtonClick = {
             isAddSubjectDialogOpen = false
@@ -72,15 +67,15 @@ fun DashboardScreen(
                 CountCardSection(
                     modifier = Modifier.fillMaxWidth()
                         .padding(12.dp),
-                    subjectCount = 5,
-                    studiedHours = "10",
-                    goalHours = "15"
+                    subjectCount = state.totalSubjectCount,
+                    goalHours = state.totalGoalStudyHours.toString(),
+                    studiedHours = state.totalStudiedHours.toString()
                 )
             }
             item {
                 SubjectCardSection(
                     modifier = Modifier.fillMaxWidth(),
-                    subjectList = subjects,
+                    subjectList = state.subjects,
                     onAddIconClicked = { isAddSubjectDialogOpen = true },
                     onSubjectCardClick = onSubjectCardClick
                 )
