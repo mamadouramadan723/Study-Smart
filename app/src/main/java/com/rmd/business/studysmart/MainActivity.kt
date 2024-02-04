@@ -7,7 +7,9 @@ import androidx.activity.enableEdgeToEdge
 import com.ramcosta.composedestinations.DestinationsNavHost
 import com.rmd.business.studysmart.presentation.route.NavGraphs
 import com.rmd.business.studysmart.presentation.theme.StudySmartTheme
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
