@@ -1,5 +1,6 @@
 package com.rmd.business.studysmart.data.datasource.local
 
+import androidx.compose.ui.graphics.toArgb
 import com.rmd.business.studysmart.domain.model.Session
 import com.rmd.business.studysmart.domain.model.Subject
 import com.rmd.business.studysmart.domain.model.Task
@@ -12,31 +13,31 @@ val subjects = listOf(
     Subject(
         name = "English",
         goalHours = 10f,
-        colors = Subject.subjectCardColors[0],
+        colors = Subject.subjectCardColors[0].map { it.toArgb() },
         subjectId = 0
     ),
     Subject(
         name = "Physics",
         goalHours = 10f,
-        colors = Subject.subjectCardColors[1],
+        colors = Subject.subjectCardColors[1].map { it.toArgb() },
         subjectId = 0
     ),
     Subject(
         name = "Maths",
         goalHours = 10f,
-        colors = Subject.subjectCardColors[2],
+        colors = Subject.subjectCardColors[2].map { it.toArgb() },
         subjectId = 0
     ),
     Subject(
         name = "Geology",
         goalHours = 10f,
-        colors = Subject.subjectCardColors[3],
+        colors = Subject.subjectCardColors[3].map { it.toArgb() },
         subjectId = 0
     ),
     Subject(
         name = "Fine Arts",
         goalHours = 10f,
-        colors = Subject.subjectCardColors[4],
+        colors = Subject.subjectCardColors[4].map { it.toArgb() },
         subjectId = 0
     ),
 )
