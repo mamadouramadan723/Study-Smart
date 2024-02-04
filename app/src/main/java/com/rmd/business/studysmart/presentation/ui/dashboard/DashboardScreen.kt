@@ -103,7 +103,6 @@ fun DashboardScreen(
                 tasks = tasks,
                 onCheckBoxClick = { onEvent(DashboardEvent.OnTaskIsCompleteChange(it)) },
                 onTaskCardClick = onTaskCardClick
-
             )
             item {
                 Spacer(modifier = Modifier.height(20.dp))
