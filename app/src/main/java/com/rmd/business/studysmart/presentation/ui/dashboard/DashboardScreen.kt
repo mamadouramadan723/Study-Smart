@@ -37,6 +37,7 @@ fun DashboardScreen(
 ) {
     var isAddSubjectDialogOpen by rememberSaveable { mutableStateOf(false) }
     var isDeleteSessionDialogOpen by rememberSaveable { mutableStateOf(false) }
+
     var subjectName by remember { mutableStateOf("") }
     var goalHours by remember { mutableStateOf("") }
     var selectedColor by remember { mutableStateOf(Subject.subjectCardColors.random()) }
