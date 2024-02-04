@@ -37,8 +37,4 @@ class SessionRepositoryImpl @Inject constructor(
     override fun getTotalSessionsDurationBySubject(subjectId: Int): Flow<Long> {
         TODO("Not yet implemented")
     }
-
-    override fun getTotalSessionsDurationBySubjectId(subjectId: Int): Flow<Long> {
-        TODO("Not yet implemented")
-    }
 }
