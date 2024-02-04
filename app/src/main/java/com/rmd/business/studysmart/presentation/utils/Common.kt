@@ -37,8 +37,7 @@ enum class Priority(
 
 fun Long?.changeMillisToDateString(): String {
     val date: LocalDate = this?.let {
-        Instant
-            .ofEpochMilli(it)
+        Instant.ofEpochMilli(it)
             .atZone(ZoneId.systemDefault())
             .toLocalDate()
     } ?: LocalDate.now()
@@ -48,5 +47,9 @@ fun Long?.changeMillisToDateString(): String {
 fun Long.toHours(): Float {
     val hours = this.toFloat() / 3600f
     return "%.2f".format(hours)
+        .replace(
+            ",",
+            "."
+        )
         .toFloat()
 }

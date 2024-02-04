@@ -39,9 +39,9 @@ class DashboardViewModel @Inject constructor(
         sessionRepository.getTotalSessionsDuration()
     ) { state, subjectCount, goalHours, subjects, totalSessionDuration ->
         state.copy(
-            subjects = subjects,
-            totalGoalStudyHours = goalHours,
             totalSubjectCount = subjectCount,
+            totalGoalStudyHours = goalHours,
+            subjects = subjects,
             totalStudiedHours = totalSessionDuration.toHours()
         )
     }.stateIn(
