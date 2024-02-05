@@ -22,10 +22,14 @@ fun DashboardScreenRoute(
 
     val viewModel: DashboardViewModel = hiltViewModel()
     val state by viewModel.state.collectAsStateWithLifecycle()
+    val tasks by viewModel.tasks.collectAsStateWithLifecycle()
+    val recentSessions by viewModel.recentSessions.collectAsStateWithLifecycle()
 
-    DashboardScreen(
-        state = state,
+    DashboardScreen(state = state,
+        tasks = tasks,
+        recentSessions = recentSessions,
         onEvent = viewModel::onEvent,
+        snackbarEvent = viewModel.snackbarEventFlow,
         onSubjectCardClick = { subjectId ->
             subjectId?.let {
                 val navArg = SubjectScreenNavArgs(subjectId = subjectId)
@@ -41,6 +45,5 @@ fun DashboardScreenRoute(
         },
         onStartSessionButtonClick = {
             navigator.navigate(SessionScreenRouteDestination())
-        }
-    )
+        })
 }
