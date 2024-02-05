@@ -1,19 +1,26 @@
 package com.rmd.business.studysmart.presentation.viewmodel
 
 import androidx.compose.material3.SnackbarDuration
+import androidx.lifecycle.SavedStateHandle
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.rmd.business.studysmart.domain.model.Task
 import com.rmd.business.studysmart.domain.model.TaskScreenNavArgs
+import com.rmd.business.studysmart.domain.repository.SubjectRepository
+import com.rmd.business.studysmart.domain.repository.TaskRepository
 import com.rmd.business.studysmart.presentation.event.SnackbarEvent
 import com.rmd.business.studysmart.presentation.event.TaskEvent
+import com.rmd.business.studysmart.presentation.route.navArgs
 import com.rmd.business.studysmart.presentation.state.TaskState
+import com.rmd.business.studysmart.presentation.utils.Priority
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.MutableSharedFlow
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.SharingStarted
 import kotlinx.coroutines.flow.asSharedFlow
+import kotlinx.coroutines.flow.combine
+import kotlinx.coroutines.flow.stateIn
 import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
@@ -21,7 +28,12 @@ import java.time.Instant
 import javax.inject.Inject
 
 @HiltViewModel
-class TaskViewModel @Inject constructor() : ViewModel() {
+class TaskViewModel @Inject constructor(
+        private val taskRepository: TaskRepository,
+        private val subjectRepository: SubjectRepository,
+        savedStateHandle: SavedStateHandle
+) : ViewModel() {
+
     private val navArgs: TaskScreenNavArgs = savedStateHandle.navArgs()
 
     private val _state = MutableStateFlow(TaskState())
@@ -195,5 +207,4 @@ class TaskViewModel @Inject constructor() : ViewModel() {
             }
         }
     }
-
 }
