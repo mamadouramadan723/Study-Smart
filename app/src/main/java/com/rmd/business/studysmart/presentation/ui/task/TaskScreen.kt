@@ -19,10 +19,13 @@ import androidx.compose.material3.IconButton
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.OutlinedTextField
 import androidx.compose.material3.Scaffold
+import androidx.compose.material3.SnackbarHost
+import androidx.compose.material3.SnackbarHostState
 import androidx.compose.material3.Text
 import androidx.compose.material3.rememberDatePickerState
 import androidx.compose.material3.rememberModalBottomSheetState
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
@@ -38,17 +41,25 @@ import com.rmd.business.studysmart.presentation.component.DialogDelete
 import com.rmd.business.studysmart.presentation.component.PriorityButton
 import com.rmd.business.studysmart.presentation.component.SubjectListBottomSheet
 import com.rmd.business.studysmart.presentation.component.TaskDatePicker
+import com.rmd.business.studysmart.presentation.event.SnackbarEvent
+import com.rmd.business.studysmart.presentation.event.TaskEvent
+import com.rmd.business.studysmart.presentation.state.TaskState
 import com.rmd.business.studysmart.presentation.theme.Red
 import com.rmd.business.studysmart.presentation.ui.session.section.RelatedToSubjectSection
 import com.rmd.business.studysmart.presentation.ui.task.section.TaskTopBar
 import com.rmd.business.studysmart.presentation.utils.Priority
 import com.rmd.business.studysmart.presentation.utils.changeMillisToDateString
+import kotlinx.coroutines.flow.SharedFlow
+import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
 import java.time.Instant
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun TaskScreen(
+        state: TaskState,
+        snackbarEvent: SharedFlow<SnackbarEvent>,
+        onEvent: (TaskEvent) -> Unit,
         onBackButtonClick: () -> Unit
 ) {
     var isDeleteDialogOpen by rememberSaveable { mutableStateOf(false) }
@@ -63,15 +74,31 @@ fun TaskScreen(
     val sheetState = rememberModalBottomSheetState()
     var isBottomSheetOpen by remember { mutableStateOf(false) }
 
-    var title by remember { mutableStateOf("") }
-    var description by remember { mutableStateOf("") }
-
     var taskTitleError by rememberSaveable { mutableStateOf<String?>(null) }
     taskTitleError = when {
-        title.isBlank() -> "Please enter task title."
-        title.length < 4 -> "Task title is too short."
-        title.length > 30 -> "Task title is too long."
+        state.title.isBlank() -> "Please enter task title."
+        state.title.length < 4 -> "Task title is too short."
+        state.title.length > 30 -> "Task title is too long."
         else -> null
+    }
+
+    val snackbarHostState = remember { SnackbarHostState() }
+
+    LaunchedEffect(key1 = true) {
+        snackbarEvent.collectLatest { event ->
+            when (event) {
+                is SnackbarEvent.ShowSnackbar -> {
+                    snackbarHostState.showSnackbar(
+                        message = event.message,
+                        duration = event.duration
+                    )
+                }
+
+                SnackbarEvent.NavigateUp -> {
+                    onBackButtonClick()
+                }
+            }
+        }
     }
 
     DialogDelete(isOpen = isDeleteDialogOpen,
@@ -79,6 +106,7 @@ fun TaskScreen(
         bodyText = "Are you sure, you want to delete this task? " + "This action can not be undone.",
         onDismissRequest = { isDeleteDialogOpen = false },
         onConfirmButtonClick = {
+            onEvent(TaskEvent.DeleteTask)
             isDeleteDialogOpen = false
         })
 
@@ -86,6 +114,7 @@ fun TaskScreen(
         isOpen = isDatePickerDialogOpen,
         onDismissRequest = { isDatePickerDialogOpen = false },
         onConfirmButtonClicked = {
+            onEvent(TaskEvent.OnDateChange(millis = datePickerState.selectedDateMillis))
             isDatePickerDialogOpen = false
         })
 
@@ -100,14 +129,15 @@ fun TaskScreen(
                 }
         })
 
-    Scaffold(topBar = {
-        TaskTopBar(isTaskExist = true,
-            isComplete = false,
-            checkBoxBorderColor = Red,
-            onBackButtonClick = onBackButtonClick,
-            onDeleteButtonClick = { isDeleteDialogOpen = true },
-            onCheckBoxClick = {})
-    }) { paddingValue ->
+    Scaffold(snackbarHost = { SnackbarHost(hostState = snackbarHostState) },
+        topBar = {
+            TaskTopBar(isTaskExist = true,
+                isComplete = false,
+                checkBoxBorderColor = Red,
+                onBackButtonClick = onBackButtonClick,
+                onDeleteButtonClick = { isDeleteDialogOpen = true },
+                onCheckBoxClick = {})
+        }) { paddingValue ->
         Column(
             modifier = Modifier.verticalScroll(state = rememberScrollState())
                 .fillMaxSize()

@@ -14,7 +14,11 @@ fun TaskScreenRoute(
         navigator: DestinationsNavigator
 ) {
     val viewModel: TaskViewModel = hiltViewModel()
+    val state by viewModel.state.collectAsStateWithLifecycle()
     TaskScreen(
+        state = state,
+        snackbarEvent = viewModel.snackbarEventFlow,
+        onEvent = viewModel::onEvent,
         onBackButtonClick = { navigator.navigateUp() }
     )
 }
