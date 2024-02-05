@@ -12,6 +12,7 @@ import androidx.compose.material3.SnackbarHost
 import androidx.compose.material3.SnackbarHostState
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
@@ -32,6 +33,7 @@ import com.rmd.business.studysmart.presentation.ui.dashboard.section.DashboardTo
 import com.rmd.business.studysmart.presentation.ui.dashboard.section.StudySessionsSection
 import com.rmd.business.studysmart.presentation.ui.dashboard.section.SubjectCardSection
 import kotlinx.coroutines.flow.SharedFlow
+import kotlinx.coroutines.flow.collectLatest
 
 @Composable
 fun DashboardScreen(
@@ -49,6 +51,20 @@ fun DashboardScreen(
 
     val snackbarHostState = remember { SnackbarHostState() }
 
+    LaunchedEffect(key1 = true) {
+        snackbarEvent.collectLatest { event ->
+            when (event) {
+                is SnackbarEvent.ShowSnackbar -> {
+                    snackbarHostState.showSnackbar(
+                        message = event.message,
+                        duration = event.duration
+                    )
+                }
+
+                SnackbarEvent.NavigateUp -> {}
+            }
+        }
+    }
 
     DialogAdd(
         isOpen = isAddSubjectDialogOpen,
