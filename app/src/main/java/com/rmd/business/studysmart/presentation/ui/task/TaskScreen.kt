@@ -11,6 +11,7 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.ArrowDropDown
 import androidx.compose.material.icons.filled.DateRange
 import androidx.compose.material3.Button
 import androidx.compose.material3.ExperimentalMaterial3Api
@@ -44,7 +45,6 @@ import com.rmd.business.studysmart.presentation.component.TaskDatePicker
 import com.rmd.business.studysmart.presentation.event.SnackbarEvent
 import com.rmd.business.studysmart.presentation.event.TaskEvent
 import com.rmd.business.studysmart.presentation.state.TaskState
-import com.rmd.business.studysmart.presentation.ui.session.section.RelatedToSubjectSection
 import com.rmd.business.studysmart.presentation.ui.task.section.TaskTopBar
 import com.rmd.business.studysmart.presentation.utils.Priority
 import com.rmd.business.studysmart.presentation.utils.changeMillisToDateString
@@ -144,18 +144,18 @@ fun TaskScreen(
                 .padding(horizontal = 12.dp)
         ) {
             OutlinedTextField(modifier = Modifier.fillMaxWidth(),
-                value = title,
-                onValueChange = { title = it },
+                value = state.title,
+                onValueChange = { onEvent(TaskEvent.OnTitleChange(it)) },
                 label = { Text(text = "Title") },
                 singleLine = true,
-                isError = taskTitleError != null && title.isNotBlank(),
+                isError = taskTitleError != null && state.title.isNotBlank(),
                 supportingText = { Text(text = taskTitleError.orEmpty()) })
             Spacer(modifier = Modifier.height(10.dp))
             OutlinedTextField(
                 modifier = Modifier.fillMaxWidth(),
-                value = description,
-                onValueChange = { description = it },
-                label = { Text(text = "Description") },
+                value = state.description,
+                onValueChange = { onEvent(TaskEvent.OnDescriptionChange(it)) },
+                label = { Text(text = "Description") }
             )
             Spacer(modifier = Modifier.height(20.dp))
             Text(
@@ -186,27 +186,47 @@ fun TaskScreen(
             Spacer(modifier = Modifier.height(10.dp))
             Row(modifier = Modifier.fillMaxWidth()) {
                 Priority.entries.forEach { priority ->
-                    PriorityButton(modifier = Modifier.weight(1f),
+                    PriorityButton(
+                        modifier = Modifier.weight(1f),
                         label = priority.title,
                         backgroundColor = priority.color,
-                        borderColor = if (priority == Priority.MEDIUM) {
+                        borderColor = if (priority == state.priority) {
                             Color.White
                         } else Color.Transparent,
-                        labelColor = if (priority == Priority.MEDIUM) {
+                        labelColor = if (priority == state.priority) {
                             Color.White
                         } else Color.White.copy(alpha = 0.7f),
-                        onClick = {})
+                        onClick = { onEvent(TaskEvent.OnPriorityChange(priority)) }
+                    )
                 }
             }
             Spacer(modifier = Modifier.height(30.dp))
-            RelatedToSubjectSection(modifier = Modifier.fillMaxWidth()
-                .padding(horizontal = 12.dp),
-                relatedToSubject = "English",
-                selectSubjectButtonClick = { isBottomSheetOpen = true })
+            Text(
+                text = "Related to subject",
+                style = MaterialTheme.typography.bodySmall
+            )
+            Row(
+                modifier = Modifier.fillMaxWidth(),
+                horizontalArrangement = Arrangement.SpaceBetween,
+                verticalAlignment = Alignment.CenterVertically
+            ) {
+                val firstSubject = state.subjects.firstOrNull()?.name ?: ""
+                Text(
+                    text = state.relatedToSubject ?: firstSubject,
+                    style = MaterialTheme.typography.bodyLarge
+                )
+                IconButton(onClick = { isBottomSheetOpen = true }) {
+                    Icon(
+                        imageVector = Icons.Default.ArrowDropDown,
+                        contentDescription = "Select Subject"
+                    )
+                }
+            }
             Button(
                 enabled = taskTitleError == null,
-                onClick = { /*TODO*/ },
-                modifier = Modifier.fillMaxWidth()
+                onClick = { onEvent(TaskEvent.SaveTask) },
+                modifier = Modifier
+                    .fillMaxWidth()
                     .padding(vertical = 20.dp)
             ) {
                 Text(text = "Save")
