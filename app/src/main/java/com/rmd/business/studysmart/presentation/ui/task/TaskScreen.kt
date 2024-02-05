@@ -44,7 +44,6 @@ import com.rmd.business.studysmart.presentation.component.TaskDatePicker
 import com.rmd.business.studysmart.presentation.event.SnackbarEvent
 import com.rmd.business.studysmart.presentation.event.TaskEvent
 import com.rmd.business.studysmart.presentation.state.TaskState
-import com.rmd.business.studysmart.presentation.theme.Red
 import com.rmd.business.studysmart.presentation.ui.session.section.RelatedToSubjectSection
 import com.rmd.business.studysmart.presentation.ui.task.section.TaskTopBar
 import com.rmd.business.studysmart.presentation.utils.Priority
@@ -131,12 +130,12 @@ fun TaskScreen(
 
     Scaffold(snackbarHost = { SnackbarHost(hostState = snackbarHostState) },
         topBar = {
-            TaskTopBar(isTaskExist = true,
-                isComplete = false,
-                checkBoxBorderColor = Red,
+            TaskTopBar(isTaskExist = state.currentTaskId != null,
+                isComplete = state.isTaskComplete,
+                checkBoxBorderColor = state.priority.color,
                 onBackButtonClick = onBackButtonClick,
                 onDeleteButtonClick = { isDeleteDialogOpen = true },
-                onCheckBoxClick = {})
+                onCheckBoxClick = { onEvent(TaskEvent.OnIsCompleteChange) })
         }) { paddingValue ->
         Column(
             modifier = Modifier.verticalScroll(state = rememberScrollState())
