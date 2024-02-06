@@ -28,7 +28,7 @@ fun SubjectScreenRoute(
         onAddTaskButtonClick = {
             val navArg = TaskScreenNavArgs(
                 taskId = null,
-                subjectId = -1
+                subjectId = state.currentSubjectId
             )
             navigator.navigate(TaskScreenRouteDestination(navArgs = navArg))
         },
