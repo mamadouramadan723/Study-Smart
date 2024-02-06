@@ -19,6 +19,7 @@ import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 import com.rmd.business.studysmart.domain.model.Task
 import com.rmd.business.studysmart.presentation.utils.Priority
+import com.rmd.business.studysmart.presentation.utils.changeMillisToDateString
 
 @Composable
 fun TaskCard(
@@ -27,12 +28,9 @@ fun TaskCard(
         onCheckBoxClick: () -> Unit,
         onClick: () -> Unit
 ) {
-    ElevatedCard(
-        modifier = modifier.clickable { onClick() }
-    ) {
+    ElevatedCard(modifier = modifier.clickable { onClick() }) {
         Row(
-            modifier = Modifier
-                .fillMaxWidth()
+            modifier = Modifier.fillMaxWidth()
                 .padding(8.dp),
             verticalAlignment = Alignment.CenterVertically
         ) {
@@ -54,7 +52,7 @@ fun TaskCard(
                 )
                 Spacer(modifier = Modifier.height(4.dp))
                 Text(
-                    text = "${task.dueDate}",
+                    text = task.dueDate.changeMillisToDateString(),
                     style = MaterialTheme.typography.bodySmall
                 )
             }
