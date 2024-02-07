@@ -23,11 +23,16 @@ import com.rmd.business.studysmart.data.datasource.local.subjects
 import com.rmd.business.studysmart.presentation.component.DialogDelete
 import com.rmd.business.studysmart.presentation.component.StudySessionsList
 import com.rmd.business.studysmart.presentation.component.SubjectListBottomSheet
+import com.rmd.business.studysmart.presentation.service.ServiceHelper
 import com.rmd.business.studysmart.presentation.service.StudySessionTimerService
 import com.rmd.business.studysmart.presentation.ui.session.section.RelatedToSubjectSection
 import com.rmd.business.studysmart.presentation.ui.session.section.SessionTopBar
 import com.rmd.business.studysmart.presentation.ui.session.section.TimerControlButton
 import com.rmd.business.studysmart.presentation.ui.session.section.TimerSection
+import com.rmd.business.studysmart.presentation.utils.Constants.ACTION_SERVICE_CANCEL
+import com.rmd.business.studysmart.presentation.utils.Constants.ACTION_SERVICE_START
+import com.rmd.business.studysmart.presentation.utils.Constants.ACTION_SERVICE_STOP
+import com.rmd.business.studysmart.presentation.utils.TimerState
 import kotlinx.coroutines.launch
 
 @OptIn(ExperimentalMaterial3Api::class)
@@ -106,9 +111,23 @@ fun SessionScreen(
                     modifier = Modifier
                         .fillMaxWidth()
                         .padding(12.dp),
-                    startButtonClick = { },
-                    cancelButtonClick = { },
-                    finishButtonClick = { }
+                    startButtonClick = {
+                        ServiceHelper.triggerForegroundService(
+                            context = context,
+                            action = if (currentTimerState == TimerState.STARTED) {
+                                ACTION_SERVICE_STOP
+                            } else ACTION_SERVICE_START
+                        )
+                    },
+                    cancelButtonClick = {
+                        ServiceHelper.triggerForegroundService(
+                            context = context,
+                            action = ACTION_SERVICE_CANCEL
+                        )
+                    },
+                    finishButtonClick = { },
+                    timerState = currentTimerState,
+                    seconds = seconds
                 )
             }
             StudySessionsList(
